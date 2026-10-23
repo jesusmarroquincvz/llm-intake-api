@@ -53,3 +53,38 @@ async def classify_request(request: Request) -> JSONResponse:
             return JSONResponse(status_code=502, content={"detail": str(e)})
 
     return JSONResponse(status_code=200, content=decision.to_dict())
+
+
+@app.post("/classify/batch")
+async def classify_batch_request(request: Request) -> JSONResponse:
+    """Classify the request body's `texts` list and return one decision per text, in order."""
+    try:
+        body = await request.json()
+    except ValueError:
+        return JSONResponse(status_code=422, content={"detail": "request body must be valid JSON"})
+
+    texts = body.get("texts") if isinstance(body, dict) else None
+    if texts is None:
+        return JSONResponse(status_code=422, content={"detail": "missing texts field"})
+    if not isinstance(texts, list) or not all(isinstance(t, str) for t in texts):
+        return JSONResponse(status_code=422, content={"detail": "'texts' must be a list of strings"})
+    if len(texts) == 0:
+        return JSONResponse(status_code=422, content={"detail": "'texts' must not be empty"})
+    if len(texts) > 20:
+        return JSONResponse(status_code=422, content={"detail": "'texts' must have at most 20 elements"})
+
+    with _tracer.start_as_current_span("classify_batch") as span:
+        span.set_attribute("batch.size", len(texts))
+        decisions: list[dict] = []
+        for text in texts:
+            if not text.strip():
+                decisions.append({"error": "text must not be empty"})
+                continue
+            try:
+                decision = classify(text, _llm)
+            except (ValidationError, AgentError) as e:
+                decisions.append({"error": str(e)})
+            else:
+                decisions.append(decision.to_dict())
+
+    return JSONResponse(status_code=200, content={"decisions": decisions})
