@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "PHOENIX_HOOK_PYTHON=\"/Users/jesus.marroquincavaz/Downloads/LLM Evaluation Phoenix/dev-loop-demo/.venv/bin/python\" \"$CLAUDE_PROJECT_DIR/../hooks/phoenix_session_hook.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "PHOENIX_HOOK_PYTHON=\"/Users/jesus.marroquincavaz/Downloads/LLM Evaluation Phoenix/dev-loop-demo/.venv/bin/python\" \"$CLAUDE_PROJECT_DIR/../hooks/phoenix_session_hook.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
