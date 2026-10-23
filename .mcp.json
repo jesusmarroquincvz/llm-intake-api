@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "team-standards": {
-      "command": "/Users/jesus.marroquincavaz/Downloads/LLM Evaluation Phoenix/dev-loop-demo/.venv/bin/python",
+      "command": "python",
       "args": [
         "../mcp_server/team_standards.py"
       ]
