@@ -1,0 +1,5 @@
+pytest
+ruff
+arize-phoenix-client
+claude-agent-sdk
+httpx
