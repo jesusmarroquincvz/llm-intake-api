@@ -9,10 +9,10 @@ class ModelConfig:
     """Which model and thinking level an agent uses."""
 
     model: str
-    thinking: str = "medium"
+    thinking: str = "high"
 
 
-# Current production mapping (Gemini 2.x, to be migrated before the deprecation).
+# Current production mapping (Gemini 2.x, thinking high everywhere; to be migrated before the deprecation).
 MODELS: dict[str, ModelConfig] = {
     "intent": ModelConfig("gemini-2.5-flash"),
     "urgency": ModelConfig("gemini-2.5-flash"),
