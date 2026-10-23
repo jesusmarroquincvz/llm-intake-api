@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "../hooks/phoenix_session_hook.py",
+        "timeout": 15,
+        "env": {
+          "PHOENIX_HOOK_PYTHON": "/Users/jesus.marroquincavaz/Downloads/LLM Evaluation Phoenix/dev-loop-demo/.venv/bin/python",
+          "PHOENIX_TOOL": "vscode-copilot"
+        }
+      }
+    ]
+  }
+}
