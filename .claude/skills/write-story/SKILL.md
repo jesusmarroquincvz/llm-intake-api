@@ -13,6 +13,6 @@ You are given a story id, a title and a list of requirements. Produce two files,
    the agent is expected to parse), and never call a real model. Use the existing modules and exception types in
    `intake/` (read them first). The tests must fail on the current code and pass on a correct implementation.
 
-Rules: do not implement the feature; do not touch anything under `intake/` or `tests/`; the acceptance test is hidden
+Rules: do not implement the feature; do not write any file inside this repository (no scratch copies, no reference implementations, no temp folders); do not touch anything under `intake/` or `tests/`; the acceptance test is hidden
 from the implementer, so it must not depend on names the ticket does not state. Finish by listing the two files and the
 number of tests.
